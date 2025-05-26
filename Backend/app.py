@@ -7,11 +7,8 @@ from datetime import datetime
 
 # File to log session data
 log_file = "../data/results.csv"
-
-# Ensure the data folder exists
 os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
-# Create the results.csv file with headers if it doesn't exist
 if not os.path.exists(log_file):
     with open(log_file, "w", encoding="utf-8") as f:
         f.write("timestamp,stress_level,feedback,tip,category\n")
@@ -20,7 +17,7 @@ if not os.path.exists(log_file):
 app = Flask(__name__)
 CORS(app)
 
-# Load categorized CSVs
+# Loading categorized CSVs
 exercises_df = pd.read_csv("../data/Categorized_CalmBot_Exercises.csv")
 motivations_df = pd.read_csv("../data/Categorized_CalmBot_Motivational_Quotes.csv")
 
@@ -45,13 +42,13 @@ def get_tip():
     matching_exercises = exercises_df[exercises_df['StressLevelCategory'] == category]
     matching_motivation = motivations_df[motivations_df['StressLevelCategory'] == category]
 
-    # Add category column
+    # Adding category column
     matching_exercises = matching_exercises[['Category', 'Description']].rename(columns={"Description": "Tip"})
     matching_motivation = matching_motivation[['Category', 'Message']].rename(columns={"Message": "Tip"})
 
     combined = pd.concat([matching_exercises, matching_motivation], ignore_index=True)
 
-    # Pick random tip and category
+    # Picking random tip and category
     if combined.empty:
         selected_tip = "Take a breath. You're doing great just by showing up!"
         tip_category = "General"
