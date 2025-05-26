@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CalmBot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🧘 CalmBot</h1>
+        <label for="stress">How stressed are you? (0-10)</label>
+        <input type="range" id="stress" min="0" max="10" value="5">
+        <p>Stress Level: <span id="stressValue">5</span></p>
+        <button onclick="startSession()">Start Session</button>
+        <!-- Guided Breathing Animation -->
+        <div class="breathing-container">
+        <div class="circle"></div>
+        <p id="breathText">Inhale...</p>
+        </div>
+
+
+
+
+        <div id="responseBox"></div>
+
+        <label for="feedback">Optional feedback:</label><br>
+        <textarea id="feedback" rows="3" cols="30" placeholder="Write your thoughts..."></textarea><br><br>
+        <br>
+        <button onclick="endSession()">End Session</button>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
