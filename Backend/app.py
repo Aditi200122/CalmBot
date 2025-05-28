@@ -69,18 +69,32 @@ def get_tip():
         "category": tip_category
     })
 
+# @app.route('/end_session', methods=['POST'])
+# def end_session():
+#     data = request.get_json()
+#     stress = data.get('stress')
+#     feedback = data.get('feedback', "")
+#     clean_feedback = str(feedback).replace(",", ";").replace("\n", " ").strip()
+
+#     # Log feedback only
+#     with open(log_file, "a", encoding="utf-8") as f:
+#         f.write(f"{datetime.now()},{stress},{clean_feedback},(Session ended),End\n")
+
+#     return jsonify({"message": "Thanks for your feedback!"})
+
 @app.route('/end_session', methods=['POST'])
 def end_session():
     data = request.get_json()
     stress = data.get('stress')
+    post_stress = data.get('post_stress')
     feedback = data.get('feedback', "")
     clean_feedback = str(feedback).replace(",", ";").replace("\n", " ").strip()
 
-    # Log feedback only
     with open(log_file, "a", encoding="utf-8") as f:
-        f.write(f"{datetime.now()},{stress},{clean_feedback},(Session ended),End\n")
+        f.write(f"{datetime.now()},{stress},{post_stress},{clean_feedback},(Session ended)\n")
 
     return jsonify({"message": "Thanks for your feedback!"})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
