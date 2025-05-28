@@ -17,6 +17,13 @@
         <p id="breathText">Inhale...</p>
         </div>
         <div id="responseBox"></div>
+        <!-- Post-Stress Slider -->
+        <div id="postStressContainer" style="display: none;">
+        <label for="postStress">How do you feel now? (0–10)</label><br>
+        <input type="range" id="postStress" min="0" max="10" value="5">
+        <p>Your new stress level: <span id="postStressValue">5</span></p>
+        </div>
+
         <label for="feedback">Optional feedback:</label><br>
         <textarea id="feedback" rows="3" cols="30" placeholder="Write your thoughts..."></textarea><br><br>
         <br>
