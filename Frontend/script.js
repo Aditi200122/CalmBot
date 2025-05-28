@@ -3,6 +3,13 @@ const output = document.getElementById("stressValue");
 output.innerHTML = slider.value;
 
 let breathInterval;  // Store reference to interval
+let postSlider = document.getElementById("postStress");
+let postValue = document.getElementById("postStressValue");
+
+postSlider.oninput = function () {
+  postValue.innerText = this.value;
+};
+
 
 function startBreathingAnimation() {
     let breathText = document.getElementById("breathText");
@@ -39,6 +46,8 @@ function startSession() {
     .then(response => response.json())
     .then(data => {
         document.getElementById("responseBox").innerHTML = `<p>${data.tip}</p>`;
+        document.getElementById("postStressContainer").style.display = "block";
+
 
         // Showing animation only for breathing category
         const breathingSection = document.querySelector(".breathing-container");
@@ -55,6 +64,8 @@ function startSession() {
 function endSession() {
     const stress = slider.value;
     const feedback = document.getElementById("feedback").value;
+    const postStress = document.getElementById("postStress").value;
+
 
     fetch("http://127.0.0.1:5000/end_session", {
         method: "POST",
@@ -62,9 +73,11 @@ function endSession() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            stress: stress,
-            feedback: feedback
+        stress: stress,
+        post_stress: postStress,
+        feedback: feedback
         })
+
     })
     .then(response => response.json())
     .then(data => {
