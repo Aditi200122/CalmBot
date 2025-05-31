@@ -2,7 +2,7 @@ const slider = document.getElementById("stress");
 const output = document.getElementById("stressValue");
 output.innerHTML = slider.value;
 
-let breathInterval;  // Store reference to interval
+let breathInterval;  // Storing reference to interval
 let postSlider = document.getElementById("postStress");
 let postValue = document.getElementById("postStressValue");
 
