@@ -38,7 +38,7 @@ def get_tip():
     feedback = data.get('feedback', "")
     category = get_stress_category(stress)
 
-    # Combine matching tips
+    # Combining matching tips
     matching_exercises = exercises_df[exercises_df['StressLevelCategory'] == category]
     matching_motivation = motivations_df[motivations_df['StressLevelCategory'] == category]
 
@@ -68,19 +68,6 @@ def get_tip():
         "tip": selected_tip,
         "category": tip_category
     })
-
-# @app.route('/end_session', methods=['POST'])
-# def end_session():
-#     data = request.get_json()
-#     stress = data.get('stress')
-#     feedback = data.get('feedback', "")
-#     clean_feedback = str(feedback).replace(",", ";").replace("\n", " ").strip()
-
-#     # Log feedback only
-#     with open(log_file, "a", encoding="utf-8") as f:
-#         f.write(f"{datetime.now()},{stress},{clean_feedback},(Session ended),End\n")
-
-#     return jsonify({"message": "Thanks for your feedback!"})
 
 @app.route('/end_session', methods=['POST'])
 def end_session():
