@@ -13,7 +13,6 @@ if not os.path.exists(log_file):
     with open(log_file, "w", encoding="utf-8") as f:
         f.write("timestamp,stress_level,feedback,tip,category\n")
 
-# Flask setup
 app = Flask(__name__)
 CORS(app)
 
@@ -21,7 +20,7 @@ CORS(app)
 exercises_df = pd.read_csv("../data/Categorized_CalmBot_Exercises.csv")
 motivations_df = pd.read_csv("../data/Categorized_CalmBot_Motivational_Quotes.csv")
 
-# Helper function to categorize stress
+# function to categorize stress
 def get_stress_category(stress_level):
     stress = int(stress_level)
     if stress <= 3:
@@ -50,17 +49,17 @@ def get_tip():
 
     # Picking random tip and category
     if combined.empty:
-        selected_tip = "Take a breath. You're doing great just by showing up!"
+        selected_tip = "Take a breath. You're doing great!"
         tip_category = "General"
     else:
         chosen = combined.sample(1).iloc[0]
         selected_tip = chosen['Tip']
         tip_category = chosen['Category']
 
-    # Clean feedback for CSV
+    # Cleaning feedback for CSV
     clean_feedback = str(feedback).replace(",", ";").replace("\n", " ").strip()
 
-    # Log to results file
+    # Loging to results file
     with open(log_file, "a", encoding="utf-8") as f:
         f.write(f"{datetime.now()},{stress},{clean_feedback},{selected_tip},{tip_category}\n")
 
